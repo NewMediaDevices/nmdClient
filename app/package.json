@@ -1,0 +1,22 @@
+{
+  "name": "electron-boilerplate",
+  "productName": "Electron Boilerplate",
+  "identifier": "com.example.electron-boilerplate",
+  "description": "Starter for your Electron application. Out of the box ready for serious stuff.",
+  "version": "0.1.0",
+  "author": "Mr Gumby <gumby@sillywalks.com>",
+  "main": "background.js",
+  "config": {
+    "target": "development"
+  },
+  "dependencies": {
+    "fs-jetpack": "^0.7.0",
+    "angular": "^1.4.7",
+    "angular-animate": "^1.4.7",
+    "angular-aria": "^1.4.7",
+    "angular-material": "1.0.4",
+    "angular-route": "^1.4.7",
+    "osc": "git://github.com/colinbdclark/osc.js.git#gh-65",
+    "socket.io-client": "^1.5.1"
+  }
+}

@@ -1,0 +1,36 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+md-toolbar h3 {
+  margin: auto;
+  font-weight: 800;
+  font: Futura, Arial;
+}
+md-toolbar {
+  padding: 20px;
+  background: #ef0ba3;
+  background: -moz-linear-gradient(-45deg, #ef0ba3 0%, #72adda 64%, #3683ba 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, #ef0ba3), color-stop(64%, #72adda), color-stop(100%, #3683ba));
+  background: -webkit-linear-gradient(-45deg, #ef0ba3 0%, #72adda 64%, #3683ba 100%);
+  background: -o-linear-gradient(-45deg, #ef0ba3 0%, #72adda 64%, #3683ba 100%);
+  background: -ms-linear-gradient(-45deg, #ef0ba3 0%, #72adda 64%, #3683ba 100%);
+  background: linear-gradient(135deg, #ef0ba3 0%, #72adda 64%, #3683ba 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ef0ba3', endColorstr='#3683ba', GradientType=1);
+}
+.container {
+  height: 100%;
+}
+#content {
+  padding: 20px;
+}
+.carddemoBasicUsage md-card {
+  min-height: 250px;
+}
+md-card > :not(md-card-content) img,
+md-card > img {
+  box-sizing: border-box;
+}

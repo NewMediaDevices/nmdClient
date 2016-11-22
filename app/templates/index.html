@@ -1,0 +1,17 @@
+<div class="row">
+	<h5> {{ status }} </h5>
+</div>
+
+	<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{sentence}}</span>
+            <span class="md-subhead">Score: {{score}}</span>
+						<span class="md-subhead">Score / word: {{scoreWord}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+					<md-button class="md-raised md-primary" ng-click="getNewSentence()">
+						New Sentence
+					</md-button>
+  </md-card>
