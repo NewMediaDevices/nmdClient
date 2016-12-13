@@ -2,16 +2,71 @@
 	<h5> {{ status }} </h5>
 </div>
 
-	<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{sentence}}</span>
-            <span class="md-subhead">Score: {{score}}</span>
-						<span class="md-subhead">Score / word: {{scoreWord}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-					<md-button class="md-raised md-primary" ng-click="getNewSentence()">
-						New Sentence
-					</md-button>
-  </md-card>
+<md-tabs md-selected="selectedIndex" class="md-dynamic-height" md-border-bottom md-autoselect>
+		<md-tab label="Calls" layout="row">
+			<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+		        <md-card-title>
+		          <md-card-title-text>
+		            <span class="md-headline">{{sentence}}</span>
+		            <span class="md-subhead">Score: {{score}}</span>
+								<span class="md-subhead">Score / word: {{scoreWord}}</span>
+		          </md-card-title-text>
+		        </md-card-title>
+		        <md-card-actions layout="row" layout-align="end center">
+							<md-button class="md-raised md-primary" ng-click="getNewSentence()">
+								New Sentence
+							</md-button>
+		  </md-card>
+
+			<md-card ng-repeat="call in calls" flex-xs flex-gt-xs="50">
+				<md-card-header>
+		          <md-card-header-text>
+		            <span class="md-title">{{call.description}}</span>
+		            <span class="md-subhead">team: </span>
+		          </md-card-header-text>
+		        </md-card-header>
+				<md-card-content>
+		          <p>
+		          </p>
+		    </md-card-content>
+		    <md-card-actions layout="row" layout-align="end center">
+		      <md-button ng-if="call.favorite" class="md-icon-button" aria-label="Settings">
+						<i class="material-icons md-48 icon-red">favorite</i>
+		      </md-button>
+					<md-button ng-if="!call.favorite" class="md-icon-button" aria-label="Settings">
+						<i class="material-icons md-48">favorite border</i>
+		      </md-button>
+					<md-button class="md-icon-button" aria-label="Settings">
+						<i class="material-icons md-48">remove</i>
+		      </md-button>
+		    </md-card-actions>
+			</md-card>
+		</md-tab>
+
+		<md-tab label="Add Call">
+			<form ng-submit="addCall(description,team)" layout="column" class="md-padding" style="padding-top: 0;">
+		    <div layout="row" layout-sm="column">
+		      <md-input-container>
+		        <label for="description">Message</label>
+		        <input type="text" id="description" ng-model="description">
+		      </md-input-container>
+		      <md-input-container>
+		        <label for="team">Team</label>
+		        <input type="text" id="team" ng-model="team">
+		      </md-input-container>
+		      <md-button class="add-tab md-primary md-raised" ng-disabled="!description || !team" type="submit" style="margin-right: 0;">Add Call</md-button>
+		    </div>
+  		</form>
+
+		</md-tab>
+		<md-tab label="RandomOSC">
+			<md-card ng-repeat="recent in recents">
+				<md-card-header>
+		          <md-card-header-text>
+		            <span class="md-title">OSCMsg: {{recent.msg}}</span>
+		            <span class="md-subhead">Data: {{recent.args}} </span>
+		          </md-card-header-text>
+		    </md-card-header>
+			</md-card>
+		</md-tab>
+	</md-tabs>

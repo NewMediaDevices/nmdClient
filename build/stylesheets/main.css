@@ -27,6 +27,9 @@ md-toolbar {
 #content {
   padding: 20px;
 }
+.material-icons.icon-red {
+  color: #f00;
+}
 .carddemoBasicUsage md-card {
   min-height: 250px;
 }

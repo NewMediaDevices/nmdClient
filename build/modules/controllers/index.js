@@ -7,6 +7,8 @@ angular.module('app')
         //init all vars
         $scope.status = 'not connected';
         $scope.sentence = 'no sentence requested';
+        $scope.calls;
+        $scope.recents = [];
 
         var sendPort = 3334;
         var listenPort = 3333;
@@ -22,6 +24,15 @@ angular.module('app')
             localPort: listenPort
         });
 
+        //Add calls
+        $scope.addCall = function (description, team) {
+          console.log('adding');
+          var data = new Object();
+          data.description = description;
+          data.team = team;
+          socket.emit('addCall', data);
+          console.log("message: " + data.description + " & team: " + data.team);
+        };
         /****************
          * OSC Over UDP *
 
@@ -48,11 +59,10 @@ angular.module('app')
               socket.emit('getNewSentence');
             }
           } else {
-            console.log('Not a valid OSC event');
-            udpPort.send({
-                address: "/error",
-                args: ["Not a valid OSC event"]
-            }, ip, sendPort);
+            var data = new Object();
+            data.address = osc.address;
+            data.args = osc.args;
+            socket.emit('randomOSC', data);
           }
         });
 
@@ -80,8 +90,13 @@ angular.module('app')
 
         socket.on('connect', function(){
           $scope.status = 'connected';
-          //TO DO: replace by getCurrentSentence -- first implement in nmdServer
           socket.emit('getCurrentSentence');
+        });
+
+        socket.on('getAllCalls', function(data){
+          $scope.$apply(function() {
+            $scope.calls = data;
+          })
         });
 
         socket.on('disconnect', function(){
@@ -102,6 +117,22 @@ angular.module('app')
           }, ip, sendPort);
         });
 
+        socket.on('randomOSC', function(data) {
+          console.log(data);
+          $scope.$apply(function() {
+            $scope.recents.unshift({
+                msg: data.address,
+                args: data.args
+            })
+          });
+          udpPort.send({
+              address: data.address,
+              args: JSON.stringify(data.args)
+          }, ip, sendPort);
+        })
+        socket.on('error', function(data) {
+          alert(data);
+        })
         /* OLD CODE TO B E REMOVED
         $scope.getNewSentence = function() {
       console.log('get new sentence');

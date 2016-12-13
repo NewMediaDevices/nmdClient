@@ -3,7 +3,7 @@
   "productName": "NMD Client",
   "identifier": "com.example.electron-boilerplate",
   "description": "Starter for your Electron application. Out of the box ready for serious stuff.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Joni De Borger",
   "main": "background.js",
   "repository": {
